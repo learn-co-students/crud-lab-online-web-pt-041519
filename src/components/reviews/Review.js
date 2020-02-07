@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 class Review extends Component {
 
   render() {
-    const { review } = this.props
+    //const { review } = this.props
 
     return (
       <div>
         <li>
-          {review.text}
+          {console.log('single review')}
+          {this.props.text}
         </li>
-        <button> X </button>
+        <button onClick={() => this.props.delete(this.props.id)}> X </button>
       </div>
     );
   }

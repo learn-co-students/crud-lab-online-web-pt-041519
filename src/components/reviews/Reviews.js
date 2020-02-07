@@ -5,7 +5,10 @@ class Reviews extends Component {
   render() {
     return (
       <ul>
-        Reviews
+        {this.props.review.map(res => ( 
+            <Review key={res.id} text={res.text} id={res.id} delete={this.props.deleteReview}/>
+          )
+        )} 
       </ul>
     );
   }
