@@ -149,7 +149,6 @@ describe('Restaurant Component with Redux', () => {
     wrapper.update()
 
     let deleteButton = wrapper.find('button').first();
-
     deleteButton.simulate('click');
 
     expect(store.getState().restaurants.length).to.equal(1);

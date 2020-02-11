@@ -119,11 +119,10 @@ describe('Reviews Component', () => {
     const store = createStore(manageRestaurant);
     store.dispatch({type: 'ADD_RESTAURANT', text: 'LoKi'})
     let restaurantId = store.getState().restaurants[0].id
-    store.dispatch({ type: 'ADD_REVIEW', review: { text: "Was great", restaurantId } })
-    store.dispatch({ type: 'ADD_REVIEW', review: { text: "Was not great", restaurantId } })
+    store.dispatch({ type: 'ADD_REVIEW', review: "Was great", restaurantId })
+    store.dispatch({ type: 'ADD_REVIEW', review: "Was not great", restaurantId })
     const wrapper = mount(<Provider store={store}><App /></Provider>);
-
-
+    console.log(wrapper.find(Reviews))
     expect(wrapper.find(Review)).to.have.length(2);
   });
 
@@ -131,9 +130,9 @@ describe('Reviews Component', () => {
     const store = createStore(manageRestaurant);
     store.dispatch({type: 'ADD_RESTAURANT', text: 'Tarry Lodge'})
     let restaurantId = store.getState().restaurants[0].id
-    store.dispatch({ type: 'ADD_REVIEW', review: { text: "it was good", restaurantId } })
-    store.dispatch({ type: 'ADD_REVIEW', review: { text: "it was great", restaurantId } })
-    store.dispatch({ type: 'ADD_REVIEW', review: { text: "it was bad", restaurantId: "test"} })
+    store.dispatch({ type: 'ADD_REVIEW', review: "it was good", restaurantId })
+    store.dispatch({ type: 'ADD_REVIEW', review: "it was great", restaurantId })
+    store.dispatch({ type: 'ADD_REVIEW', review: "it was bad", restaurantId: "test" })
     const wrapper = mount(<Provider store={store}><App /></Provider>);
     expect(wrapper.find(Review)).to.have.length(2);
     expect(wrapper.text()).to.contain('it was good');
@@ -162,7 +161,7 @@ describe('Reviews Component', () => {
     const store = createStore(manageRestaurant);
     store.dispatch({type: 'ADD_RESTAURANT', text: 'The Kings Head'})
     let restaurantId = store.getState().restaurants[0].id
-    store.dispatch({ type: 'ADD_REVIEW', review: { text: "became friends with bartender", restaurantId } })
+    store.dispatch({ type: 'ADD_REVIEW', review: "became friends with bartender", restaurantId })
 
     const wrapper = mount(<Provider store={store}><App /></Provider>);
 
