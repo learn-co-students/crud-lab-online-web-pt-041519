@@ -10,15 +10,14 @@ class ReviewsContainer extends Component {
     return (
       <div>
         <ReviewInput restaurantId={this.props.restaurantId} addReview={this.props.addReview} />
-        <Reviews reviews={this.props.reviews} />
+        <Reviews reviews={this.props.reviews} restaurantId={this.props.restaurantId} />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  let reviews = state.reviews.filter(review => review.restaurantId === ownProps.restaurantId )
-  return { reviews }
+const mapStateToProps = (state) => {
+  return { reviews: state.reviews }
 }
 
 

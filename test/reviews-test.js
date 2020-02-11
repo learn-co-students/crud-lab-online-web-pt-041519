@@ -122,8 +122,7 @@ describe('Reviews Component', () => {
     store.dispatch({ type: 'ADD_REVIEW', review: { text: "Was great", restaurantId } })
     store.dispatch({ type: 'ADD_REVIEW', review: { text: "Was not great", restaurantId } })
     const wrapper = mount(<Provider store={store}><App /></Provider>);
-
-
+    console.log(wrapper.find(Reviews))
     expect(wrapper.find(Review)).to.have.length(2);
   });
 
