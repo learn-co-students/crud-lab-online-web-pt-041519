@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import ReviewsContainer from '../../containers/ReviewsContainer'
 
+import cuid from 'cuid';
+
 class Restaurant extends Component {
+
+  handleOnClick = () => {
+    this.props.deleteRestaurant(this.props.restaurant.id)
+  }
 
 
   render() {
@@ -9,11 +15,15 @@ class Restaurant extends Component {
 
     return (
       <div>
-        <li>
+        {console.log(this.props)}
+        <li key={cuid()}>
           {restaurant.text}
-          <button> X </button>
-          <ReviewsContainer restaurant={restaurant}/>
+          <button onClick={this.handleOnClick}> X </button>
         </li>
+
+      
+        <ReviewsContainer restaurant={restaurant} />
+        
       </div>
     );
   }
