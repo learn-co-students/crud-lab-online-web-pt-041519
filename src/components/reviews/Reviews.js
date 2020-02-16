@@ -11,9 +11,12 @@ class Reviews extends Component {
       return <Review key={rev.id} deleteReview={deleteReview} review={rev}/>
     })
     return (
-      <ul>
-        {allRevs}
-      </ul>
+      <div>
+        <h3>Recent Reviews:</h3>
+        <ul>
+          {allRevs}
+        </ul>
+      </div>
     );
   }
 };

@@ -7,7 +7,7 @@ class Restaurants extends Component {
   render() {
     return(
       <ul>
-        {console.log(this.props)}
+        <h3>Restaurants:</h3>
         {this.props.restaurants.map(rest =>
           <Restaurant
             key={cuid()} 

@@ -10,13 +10,11 @@ class Review extends Component {
     const { review} = this.props
 
     return (
-      <div>
         <li key={cuid()}>
-          {review.text}
+          <p>{review.text}</p>
           <button onClick={this.handleOnClick}> X </button>
-        </li>
-        
-      </div>
+        </li> 
+
     );
   }
 
