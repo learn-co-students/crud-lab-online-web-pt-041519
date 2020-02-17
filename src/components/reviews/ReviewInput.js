@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Reviews from './Reviews';
 
 class ReviewInput extends Component {
 
@@ -7,16 +6,19 @@ class ReviewInput extends Component {
     text: ''
   }
 
-
-  handleOnChange = event => {
+  handleChange = event => {
     this.setState({
       text: event.target.value
     })
   }
 
-  handleOnSubmit = event => {
-    event.preventDefault()
-    this.props.addReview(this.props.restaurantId, this.state.text)
+  handleSubmit = event => {
+    event.preventDefault();
+    const reviewPacket = {
+      text: this.state.text,
+      restaurantId: this.props.restaurantId
+    }
+    this.props.addReview(reviewPacket)
     this.setState({
       text: ''
     })
@@ -26,15 +28,13 @@ class ReviewInput extends Component {
   render() {
     return (
       <div>
-        Review Input
-        <form onSubmit={(event) => this.handleOnSubmit(event)}>
-          <input
+        <form onSubmit={this.handleSubmit}>
+          <input 
             type="text"
             value={this.state.text}
-            onChange={(event) => this.handleOnChange(event)}
+            onChange={this.handleChange}
           />
-
-          <input type="submit" value="Add Review" />
+          <input type="submit"/>
         </form>
       </div>
     );

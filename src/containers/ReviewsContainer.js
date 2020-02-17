@@ -1,34 +1,31 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import ReviewInput from '../components/reviews/ReviewInput'
 import Reviews from '../components/reviews/Reviews'
-import { connect } from 'react-redux'
 
 class ReviewsContainer extends Component {
-
 
   render() {
     return (
       <div>
-        <ReviewInput restaurantId={this.props.restaurantId} addReview={this.props.addReview} />
-        <Reviews reviews={this.props.reviews} restaurantId={this.props.restaurantId} />
+        <ReviewInput addReview={this.props.addReview} restaurantId={this.props.restaurant.id}/>
+        <Reviews reviews={this.props.reviews} restaurantId={this.props.restaurant.id} deleteReview={this.props.deleteReview} />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return { reviews: state.reviews }
+const mapStateToProps = store => {
+  return {
+    reviews: store.reviews
+  }
 }
 
-
-const mapDispatchToProps = (dispatch) => ({
-  addReview: (restaurantId, review) => {
-    dispatch({
-      type: 'ADD_REVIEW',
-      restaurantId: restaurantId,
-      review: review
-    })
-  }
+const mapDispatchToProps = dispatch => ({
+  addReview: review => 
+    dispatch({ type: 'ADD_REVIEW', review: review }),
+  deleteReview: reviewId => 
+    dispatch({ type: 'DELETE_REVIEW', id: reviewId})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewsContainer)
