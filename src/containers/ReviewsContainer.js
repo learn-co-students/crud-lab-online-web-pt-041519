@@ -6,9 +6,10 @@ import Reviews from '../components/reviews/Reviews'
 class ReviewsContainer extends Component {
 
   render() {
+    console.log(this.props.restaurant.id)
     return (
       <div>
-        <ReviewInput addReview={this.props.addReview} restaurantId={this.props.restaurantId}/>
+        <ReviewInput addReview={this.props.addReview} restaurantId={this.props.restaurant.id}/>
         <Reviews 
         reviews={this.props.reviews} 
         restaurantId={this.props.restaurant.id}
