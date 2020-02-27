@@ -1,44 +1,42 @@
-  
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class RestaurantInput extends Component {
 
-  state = {
-    text: ""
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      text: ''
+    }
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
-    this.props.addRestaurant(this.state.text)
+  handleOnChange(event) {
     this.setState({
-      text: ""
+      text: event.target.value,
     })
   }
 
-  handleChange = e => {
+  handleOnSubmit(event) {
+    event.preventDefault()
+    this.props.addRestaurant(this.state.text)
     this.setState({
-      text: e.target.value
+      text: ''
     })
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input 
+        <form onSubmit={(event) => this.handleOnSubmit(event)} >
+          <input
             type="text"
-            name="text"
             value={this.state.text}
-            onChange={this.handleChange}
-          />
-          <input 
-            type="submit"
-            value="Create Restaurant"
-          />
+            onChange={(event) => this.handleOnChange(event)} />
+          <input type="submit" />
         </form>
       </div>
-    );
+    )
   }
-};
+}
 
-export default RestaurantInput;
+export default RestaurantInput

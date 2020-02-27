@@ -1,44 +1,37 @@
-import { combineReducers } from 'redux'
-import cuid from 'cuid';
-export const cuidFn = cuid;
+import cuid from 'cuid'
+export const cuidFn = cuid
 
+export default function manageRestaurants(state = {
+  restaurants: [],
+  reviews: [],
+}, action) {
+  switch (action.type) {
 
-export function restuarantsReducer( state = [], action){
+    case 'ADD_RESTAURANT':
 
-    switch(action.type){
+      const restaurant = { text: action.text, id: cuidFn() }
+      return {
+        ...state,
+        restaurants: [ ...state.restaurants, restaurant]
+      }
 
-        case "ADD_RESTAURANT":
-            return [...state, {text: action.payload, id: cuid() }]
+    case 'DELETE_RESTAURANT':
+      const restaurants = state.restaurants.filter(restaurant => restaurant.id !== action.id)
+      return { ...state, restaurants}
 
-        case "DELETE_RESTAURANT":
-            return state.filter(res => res.id !== action.payload)
+    case 'ADD_REVIEW':
 
-        default: 
-            return state
-    }
+      const review = { text: action.review.text, restaurantId: action.review.restaurantId, id: cuidFn() }
+      return { ...state,
+        reviews: [...state.reviews, review]
+      }
+
+    case 'DELETE_REVIEW':
+      const reviews = state.reviews.filter(review => review.id !== action.id)
+      return {...state, reviews }
+
+    default:
+      return state
+
+  }
 }
-
-export function reviewsReducer(state = [], action){
-    
-    switch(action.type){
-
-        case "ADD_REVIEW":
-            return [...state, {...action.payload, id: cuid() }]
-        case "DELETE_REVIEW":
-            return state.filter(rev => rev.id !== action.payload)
-        case "DELETE_RESTAURANT":
-            return state.filter(rev => rev.restaurantId !== action.payload)
-
-        default: 
-            return state
-    }
-}
-
-
-const rootReducer = combineReducers({
-    restaurants: restuarantsReducer,
-    reviews: reviewsReducer
-})
-
-
-export default rootReducer

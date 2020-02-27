@@ -1,45 +1,40 @@
-import React, { Component } from 'react';
+  
+import React, { Component } from 'react'
 
 class ReviewInput extends Component {
 
   state = {
-    text: ""
+    text: ''
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    const { text } = this.state
-    this.props.addReview({text, restaurantId: this.props.restaurantId })
+  handleOnChange = event => {
     this.setState({
-      text: ""
+      text: event.target.value,
     })
   }
 
-  handleChange = e => {
+  handleOnSubmit = event => {
+    event.preventDefault();
+    this.props.addReview({text: this.state.text, restaurantId: this.props.restaurantId });
     this.setState({
-      text: e.target.value
+      text: '',
     })
   }
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input 
+     <div>
+        <form onSubmit={this.handleOnSubmit} >
+          <label>Add Review</label>
+          <input
             type="text"
-            name="text"
             value={this.state.text}
-            onChange={this.handleChange}
-            placehoder="Review text"
-          />
-          <input 
-            type="submit"
-            value="Submit Review"
-          />
+            onChange={this.handleOnChange} />
+          <input type="submit" />
         </form>
       </div>
-    );
+    )
   }
-};
+}
 
-export default ReviewInput;
+export default ReviewInput
